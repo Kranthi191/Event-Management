@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Profile</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding-top: 80px;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f4f4f4;
+            padding: 12px 20px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header .user-name {
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .profile-button {
+            text-decoration: none;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .profile-button:hover {
+            background-color: #0056b3;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .section {
+            margin: 20px auto;
+            max-width: 800px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .event-card {
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #fdfdfd;
+        }
+
+        .event-card h3 {
+            margin: 0 0 10px;
+            color: #007bff;
+        }
+
+        .event-card p {
+            margin: 4px 0;
+            color: #555;
+        }
+
+        .no-events {
+            text-align: center;
+            color: #777;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="user-name" th:text="'Welcome, ' + ${userName}">Welcome, User</div>
+        <a href="/users/profile" class="profile-button">Back to Profile</a>
+    </div>
+
+    <h1>User Profile</h1>
+
+
+    <div class="section">
+        <h2>RSVP History</h2>
+        <div th:if="${rsvpEvents.size() > 0}">
+            <div th:each="event : ${rsvpEvents}" class="event-card">
+                <h3 th:text="${event.title}">Event Title</h3>
+                <p th:text="'Category: ' + ${event.category}">Event Category</p>
+                <p th:text="'Location: ' + ${event.location}">Event Location</p>
+                <p th:text="'Date: ' + ${event.date}">Event Date</p>
+                <p th:text="'Start Time: ' + ${event.startTime}">Start Time</p>
+                <p th:text="'End Time: ' + ${event.endTime}">End Time</p>
+            </div>
+        </div>
+        <p class="no-events" th:unless="${rsvpEvents.size() > 0}">You have no RSVP history.</p>
+    </div>
+</body>
+</html>

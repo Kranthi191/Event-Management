@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create/Edit Event</title>
+    <style>
+        /* General Layout */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin-top: 60px; /* Adjust for header */
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            background-color: #fff;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between; /* Align header content */
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .header h1 {
+            font-size: 18px;
+            margin: 0;
+            color: #333;
+        }
+
+        .header .profile-button {
+            text-decoration: none;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .header .profile-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Form Container */
+        form {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        form input[type="text"],
+        form input[type="date"],
+        form input[type="time"],
+        form textarea,
+        form select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        form textarea {
+            resize: none;
+            height: 80px;
+        }
+
+        form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #555;
+        }
+
+        /* Two-column Layout for Specific Fields */
+        .two-column {
+            display: flex;
+            gap: 10px;
+        }
+
+        .two-column > div {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Profile Button -->
+    <div class="header">
+        <h1>Create/Edit Event</h1>
+        <a href="/users/profile" class="profile-button">Profile</a>
+    </div>
+
+    <!-- Form for Creating/Editing Event -->
+    <form th:action="@{/events/create}" method="post">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required />
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+
+        <div class="two-column">
+            <div>
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" required />
+            </div>
+            <div>
+                <label for="startTime">Start Time:</label>
+                <input type="time" id="startTime" name="startTime" required />
+            </div>
+        </div>
+
+        <div class="two-column">
+            <div>
+                <label for="endTime">End Time:</label>
+                <input type="time" id="endTime" name="endTime" required />
+            </div>
+            <div>
+                <label for="category">Category:</label>
+                <select id="category" name="category" required>
+                    <option value="">Category</option>
+                    <option value="Music">Music</option>
+                    <option value="Tech">Tech</option>
+                    <option value="Sports">Sports</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- New Field for Date -->
+        <div>
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required />
+        </div>
+
+        <button type="submit">Create</button>
+    </form>
+</body>
+</html>
